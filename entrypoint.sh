@@ -223,7 +223,13 @@ migrate_db() {
 }
 
 seed_db() {
-  php artisan db:seed
+  echo "Running Seeders"
+  force=""
+  if [[ "${FORCE_SEED:-false}" == true ]]; then
+    force="--force"
+  fi
+  
+  php artisan db:seed ${force}
 }
 
 start_system() {
